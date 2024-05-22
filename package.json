@@ -1,0 +1,41 @@
+{
+  "name": "nodemailer-campaigner-transport-esm",
+  "main": "src/",
+  "description": "A nodemailer transport plugin for sending transactional emails with Campaigner",
+  "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:compwright/nodemailer-campaigner-transport-esm.git"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "email",
+    "nodemailer",
+    "campaigner"
+  ],
+  "maintainers": [
+    {
+      "name": "Jonathon Hill",
+      "email": "jonathon@compwright.com"
+    }
+  ],
+  "bugs": {
+    "web": "https://github.com/compwright/nodemailer-campaigner-transport-esm/issues"
+  },
+  "licenses": [
+    {
+      "name": "MIT",
+      "url": "https://github.com/compwright/nodemailer-campaigner-transport-esm/blob/master/LICENSE"
+    }
+  ],
+  "homepage": "https://github.com/compwright/nodemailer-campaigner-transport-esm",
+  "devDependencies": {
+    "fetch-mock": "^9.11.0",
+    "jest": "*",
+    "standard": "*",
+    "standard-version": "*"
+  }
+}
