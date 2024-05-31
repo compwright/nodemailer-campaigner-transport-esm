@@ -24,11 +24,14 @@ async function buildAttachment (attachment) {
 }
 
 async function createRequest ({ message, data }, trackLinks, forceDelivery) {
+  const addresses = message.getAddresses()
   const requestBody = {
     Subject: data.subject,
-    Recipients: message.getAddresses().map(address => ({
+    FromName: addresses.from[0].name,
+    FromEmail: addresses.from[0].address,
+    Recipients: addresses.to.map(address => ({
       ToName: address.name,
-      ToEmail: address.email
+      ToEmail: address.address
     })),
     AddToDatabase: false,
     TrackLinks: trackLinks,
@@ -107,18 +110,17 @@ class CampaignerTransport {
       body: JSON.stringify(requestData)
     })
 
-    if (!response.ok) {
-      throw response
-    }
-
     const data = await response.json()
 
     if (data?.ErrorCode) {
       throw new Error(`Error ${data.ErrorCode}: ${data.Message}`)
     }
 
-    const messageId = data.Receipts[0].RelaySendReceiptID
-    return { ...data.Receipts[0], messageId }
+    if (!response.ok) {
+      throw response
+    }
+
+    return data.Receipts[0]
   }
 
   send (mail, callback) {

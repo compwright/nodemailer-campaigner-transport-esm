@@ -19,7 +19,12 @@ test('should send a message', async function () {
         ApiKey: 'foo'
       },
       body: {
-        Recipients: [],
+        FromName: 'Test Sender',
+        FromEmail: 'test@test.com',
+        Recipients: [{
+          ToName: 'John Doe',
+          ToEmail: 'john.doe@test.com'
+        }],
         Subject: 'Bar',
         Text: 'Baz'
       },
@@ -28,7 +33,6 @@ test('should send a message', async function () {
     {
       Receipts: [
         {
-          RelaySendReceiptID: 533,
           Result: 'Success'
         }
       ]
@@ -37,7 +41,16 @@ test('should send a message', async function () {
 
   const result = await transport.sendAsync({
     message: {
-      getAddresses: () => ([])
+      getAddresses: () => ({
+        from: [{
+          name: 'Test Sender',
+          address: 'test@test.com'
+        }],
+        to: [{
+          name: 'John Doe',
+          address: 'john.doe@test.com'
+        }]
+      })
     },
     data: {
       subject: 'Bar',
@@ -45,7 +58,7 @@ test('should send a message', async function () {
     }
   })
 
-  assert.strictEqual(result.messageId, 533)
+  assert.strictEqual(result.Result, 'Success')
 
   fetchMock.reset()
 })
