@@ -2,7 +2,7 @@
   "name": "nodemailer-campaigner-transport-esm",
   "main": "src/",
   "description": "A nodemailer transport plugin for sending transactional emails with Campaigner",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "repository": {
     "type": "git",
     "url": "git@github.com:compwright/nodemailer-campaigner-transport-esm.git"
